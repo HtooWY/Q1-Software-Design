@@ -2,13 +2,18 @@ from States import States
 
 
 class Room:
-    states = ['Available', 'Occupied', 'Vacant', 'Repair']
 
-    def __init__(self, name, prevRoom, nextRoom, state):
+    def __init__(self, name):
         self.name = name
+        self.prevRoom = None
+        self.nextRoom = None
+        self.state = States.AVAILABLE
+
+    def insertPrevRoom(self, prevRoom):
         self.prevRoom = prevRoom
+
+    def insertNextRoom(self, nextRoom):
         self.nextRoom = nextRoom
-        self.state = state
 
     def checkin(self):
         if self.state == States.AVAILABLE:
@@ -39,3 +44,14 @@ class Room:
             self.state = States.VACANT
             return True
         return False
+
+    def checkAvailability(self):
+        if self.state == States.AVAILABLE:
+            return self.name
+        else:
+            if self.nextRoom:
+                return self.nextRoom.checkAvailability()
+            return None
+
+    def checkCurrentAvaility(self):
+        return self.state == States.AVAILABLE
