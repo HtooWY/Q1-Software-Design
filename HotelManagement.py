@@ -50,7 +50,6 @@ class HotelManagement:
             print("Hotel Room " + room.name + " is " + room.state + " now.")
         else:
             print("Hotel Room " + room.name + " is " + room.state + " now. You can't check out.")
-        self.firstAvailableKey = self.hotelLayout[self.roomNameList[0]].checkAvailability()
 
     def markRoomClean(self, roomName):
         if roomName not in self.roomNameList:
@@ -73,11 +72,29 @@ class HotelManagement:
             print("Hotel Room " + room.name + " is out of service for repair.")
             print("Hotel Room " + room.name + " is " + room.state + " now.")
         else:
+            print("Hotel Room " + room.name + " is " + room.state + " now. You can't mark for out of service.")
+
+    def markRoomRepaired(self, roomName):
+        if roomName not in self.roomNameList:
+            print("Room Name is not valid.")
+            return
+        room = self.hotelLayout[roomName]
+        if room.repair():
+            print("Hotel Room " + room.name + " is repaired.")
+            print("Hotel Room " + room.name + " is " + room.state + " now.")
+        else:
             print("Hotel Room " + room.name + " is " + room.state + " now. You can't repair the room.")
         self.firstAvailableKey = self.hotelLayout[self.roomNameList[0]].checkAvailability()
 
     def checkAllAvailableRooms(self):
-        print([key for key in self.roomNameList if self.hotelLayout[key].checkCurrentAvaility()])
+        availableRooms =  ([key for key in self.roomNameList if self.hotelLayout[key].checkCurrentAvaility()])
+        print(availableRooms)
+        return availableRooms
+
+    def getRoom(self, roomName):
+        if roomName not in self.roomNameList:
+            return None
+        return self.hotelLayout[roomName]
 
 
 

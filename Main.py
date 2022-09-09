@@ -6,9 +6,10 @@ if __name__ == '__main__':
     # rooms
     rooms = ['A', 'B', 'C', 'D', 'E']
     newHotel = HotelManagement(floor, rooms)
+    print("Q1 - Software Design")
     print("Welcome to boutique Hotel.")
     while True:
-        print("\nChoose these options: \n 1. Request Room Assignment \n 2. Check out Room \n 3. Mark a room clean \n 4. Mark a room for repair\n 5. List all the available room.")
+        print("\nChoose these options: \n 1. Request Room Assignment \n 2. Check out Room \n 3. Mark a room clean \n 4. Mark a room for out of service \n 5. Mark a room for repair\n 6. List all the available room.")
         option = input("Enter Option: ")
         # Request Room Assignment
         if option =="1":
@@ -25,7 +26,11 @@ if __name__ == '__main__':
         elif option == "4":
             roomName = input("Enter Room Name: ")
             newHotel.markRoomOOS(roomName)
-        # List all the available room.
+            # Mark a room for repair
         elif option == "5":
+            roomName = input("Enter Room Name: ")
+            newHotel.markRoomRepaired(roomName)
+        # List all the available room.
+        elif option == "6":
             newHotel.checkAllAvailableRooms()
 
